@@ -39,6 +39,7 @@ class Server extends AppModel {
     "HttpServer" => array('dependent' => true),
     "KafkaServer" => array('dependent' => true),
     "LdapServer" => array('dependent' => true),
+    "KdcServer" => array('dependent' => true),
     "MatchServer" => array('dependent' => true),
     "Oauth2Server" => array('dependent' => true),
     "SqlServer" => array('dependent' => true)
@@ -72,6 +73,7 @@ class Server extends AppModel {
       'rule' => array('inList', array(ServerEnum::HttpServer,
                                       ServerEnum::KafkaServer,
                                       ServerEnum::LdapServer,
+                                      ServerEnum::KdcServer,
                                       ServerEnum::MatchServer,
                                       ServerEnum::Oauth2Server,
                                       ServerEnum::SqlServer)),
@@ -91,6 +93,7 @@ class Server extends AppModel {
     ServerEnum::HttpServer   => 'HttpServer',
     ServerEnum::KafkaServer  => 'KafkaServer',
     ServerEnum::LdapServer   => 'LdapServer',
+    ServerEnum::KdcServer    => 'KdcServer',
     ServerEnum::MatchServer  => 'MatchServer',
     ServerEnum::Oauth2Server => 'Oauth2Server',
     ServerEnum::SqlServer    => 'SqlServer'

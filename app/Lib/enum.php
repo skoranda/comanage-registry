@@ -709,6 +709,9 @@ class ServerEnum
   const HttpServer    = 'HT';
   const KafkaServer   = 'KA';
   const LdapServer    = 'LD';
+  const KdcServer     = 'KC';
+// CO-1320
+//  const LdapServer    = 'LD';
   const MatchServer   = 'MT';
   const Oauth2Server  = 'O2';
   // Generic SQL Server, not "MS SQL Server"
