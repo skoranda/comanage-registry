@@ -74,15 +74,37 @@
       </div>
     </div>
     <div class="field-info">
-      <?php print ($e ? $this->Form->input('admin_hostname', array('class' => 'focusFirst')) : filter_var($kdc_servers[0]['KdcServer']['admin_hostname'],FILTER_SANITIZE_SPECIAL_CHARS)); ?>
+      <?php print ($e ? $this->Form->input('admin_hostname') : filter_var($kdc_servers[0]['KdcServer']['admin_hostname'],FILTER_SANITIZE_SPECIAL_CHARS)); ?>
+    </div>
+  </li>
+  <li>
+    <div class="field-name">
+      <?php print $this->Form->label('admin_port',_txt('fd.server.kdc.admin_port')); ?>
+      <div class="field-desc">
+        <?php print _txt('fd.server.kdc.admin_port.desc'); ?>
+      </div>
+    </div>
+    <div class="field-info">
+      <?php print ($e ? $this->Form->input('admin_port') : filter_var($kdc_servers[0]['KdcServer']['admin_port'],FILTER_SANITIZE_SPECIAL_CHARS)); ?>
+    </div>
+  </li>
+  <li>
+    <div class="field-name">
+      <?php print $this->Form->label('realm',_txt('fd.server.kdc.realm')); ?><span class="required">*</span>
+    </div>
+    <div class="field-info">
+      <?php print ($e ? $this->Form->input('realm') : filter_var($kdc_servers[0]['KdcServer']['realm'],FILTER_SANITIZE_SPECIAL_CHARS)); ?>
     </div>
   </li>
   <li>
     <div class="field-name">
       <?php print $this->Form->label('principal',_txt('fd.server.kdc.principal')); ?><span class="required">*</span>
+      <div class="field-desc">
+        <?php print _txt('fd.server.kdc.principal.desc'); ?>
+      </div>
     </div>
     <div class="field-info">
-      <?php print ($e ? $this->Form->input('principal', array('class' => 'focusFirst')) : filter_var($kdc_servers[0]['KdcServer']['principal'],FILTER_SANITIZE_SPECIAL_CHARS)); ?>
+      <?php print ($e ? $this->Form->input('principal') : filter_var($kdc_servers[0]['KdcServer']['principal'],FILTER_SANITIZE_SPECIAL_CHARS)); ?>
     </div>
   </li>
   <li>
@@ -93,7 +115,7 @@
       </div>
     </div>
     <div class="field-info">
-      <?php print ($e ? $this->Form->input('keytab', array('class' => 'focusFirst')) : filter_var($kdc_servers[0]['KdcServer']['keytab'],FILTER_SANITIZE_SPECIAL_CHARS)); ?>
+      <?php print ($e ? $this->Form->input('keytab') : filter_var($kdc_servers[0]['KdcServer']['keytab'],FILTER_SANITIZE_SPECIAL_CHARS)); ?>
     </div>
   </li>
   <?php if($e): ?>

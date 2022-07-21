@@ -504,6 +504,8 @@
     </field>
     <field name="hostname" type="C" size="256" />
     <field name="admin_hostname" type="C" size="256" />
+    <field name="admin_port" type="I" />
+    <field name="realm" type="C" size="256" />
     <field name="principal" type="C" size="256" />
     <field name="keytab" type="C" size="256" />
     <field name="created" type="T" />

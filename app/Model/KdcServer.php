@@ -55,6 +55,16 @@ class KdcServer extends AppModel {
       'required' => false,
       'allowEmpty' => true
     ),
+    'admin_port' => array(
+      'rule' => 'numeric',
+      'required' => false,
+      'allowEmpty' => true
+    ),
+    'realm' => array(
+      'rule' => 'notBlank',
+      'required' => true,
+      'allowEmpty' => false
+    ),
     'principal' => array(
       'rule' => 'notBlank',
       'required' => true,
@@ -87,11 +97,41 @@ class KdcServer extends AppModel {
       throw new InvalidArgumentException(_txt('er.notfound', array(_txt('ct.servers.1', $serverId))));
     }
 
+    $hostname = $srvr['KdcServer']['hostname'];
+    if(!empty($srvr['KdcServer']['admin_hostname'])) {
+      $admin_hostname = $srvr['KdcServer']['admin_hostname'];
+    } else {
+      $admin_hostname = $hostname;
+    }
+
     $principal = $srvr['KdcServer']['principal'];
+    $realm = $srvr['KdcServer']['realm'];
+
+    // If the principal does not end with the realm then append it
+    // before connecting.
+    if(strrpos($principal, $realm) === false) {
+      $principal = $principal . '@' . $realm;
+    }
+
     $keytab = $srvr['KdcServer']['keytab'];
     $useKeytab = true;
 
-    $conn = new KADM5($principal, $keytab, $useKeytab);
+    $config = array();
+    $config['realm'] = $realm;
+    $config['admin_server'] = $admin_hostname;
+
+    if(!empty($srvr['KdcServer']['admin_port'])) {
+      $config['admin_port'] = $srvr['KdcServer']['admin_port'];
+    }
+
+    try {
+      $conn = new KADM5($principal, $keytab, $useKeytab, $config);
+    } catch (Exception $e) {
+      $msg = "KdcServer unable to open connection to kadmin server: ";
+      $msg = $msg . print_r($e->getMessage(), true);
+      $this->log($msg);
+      throw new RuntimeException($msg);
+    }
     
     return $conn;
   }
